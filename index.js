@@ -85,7 +85,7 @@ let global = require('./routes/app_global'),
 let app = express();
 // session collection in mongo
 let sessionStore = new MongoDBStore({
-    uri: 'mongodb://localhost:27017/GA',
+    uri: 'mongodb://localhost:********',
     collection: 'sessions'
 }, function (err) {
     if (err) {
@@ -101,7 +101,7 @@ sessionStore.on('error', function (err) {
     }
 });
 // connect to database
-mongoose.connect("mongodb://localhost:27017/GA",
+mongoose.connect("mongodb://localhost:****************",
     {
         // to avoid discontinued feature
         useNewUrlParser: true,
@@ -116,7 +116,7 @@ mongoose.connect("mongodb://localhost:27017/GA",
         console.log("Connected to " + data.name + " database");
     });
 // title will be passed to API round trip URL
-app.locals.title = "Gardening-Web-App";
+app.locals.title = "**********";
 // #change when production
 app.disable("view cache");
 // set port property
@@ -146,7 +146,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 // session initialise
 app.use(session({
-    secret: 'vsbnLZ2DhMxrRzrtFyEQT8kdKJccoPYUZ',
+    secret: '*********************',
     cookie: {
         // 1 week
         maxAge: 1000 * 60 * 60 * 24 * 7
@@ -214,9 +214,9 @@ app.use(function (err, req, res, next) {
     // // block given ip
     // blockIP(req.ip);
     // only visible to backend admins. Hide detailed info from user
-    console.log("Someone tampered the code or something went wrong, redirecting...");
+    console.log("Redirecting...");
     return res.status(403)
-        .send("Data has been tampered intentionally, terminating connection...");
+        .send("Terminating connection...");
 });
 // if error, put into under maintenance mode
 app.use(function (err, req, res, next) {

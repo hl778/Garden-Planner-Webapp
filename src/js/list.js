@@ -178,7 +178,6 @@ $(document).ready(function () {
     }
     //---------------------------------liquid btn----------------------------------------
     // credits: https://codepen.io/waaark/pen/VbgwEM
-    // modified by: software project team 20
     let whoBoolean = true;
     // check browser compatibility
     if ((who[0] === 'IE' && who[1] < 10) ||

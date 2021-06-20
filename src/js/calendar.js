@@ -15,7 +15,6 @@ $(document).ready(function () {
 
 /**
  * @credit: dhtmlxscheduler ()
- * @modified_by: Software Project Team 20
  */
 function init() {
     scheduler.config.xml_date = "%Y-%m-%d %H:%i:%s";

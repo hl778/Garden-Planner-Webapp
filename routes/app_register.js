@@ -19,7 +19,7 @@ const doubleLogin = require("../middlewares/doubleLogin");
 // pexel API
 const PexelsAPI = require('pexels-api-wrapper');
 //Create Client instance by passing in API key
-let pexelsClient = new PexelsAPI("563492ad6f917000010000019ab8e4cbba794eadab78fed0d02b1f6a");
+let pexelsClient = new PexelsAPI("*****************************");
 
 
 //------------------------------routes--------------------------------------
