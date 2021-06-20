@@ -3,6 +3,8 @@
 
 ----
 
+![Demo on a table](./src/assets/img/readme-img.png)
+
 ## Basic Structure
 - This web app uses **MEN** Structure: **M**ongo, **E**xpress, **N**ode.js, without any front-end JS Framework.
 
