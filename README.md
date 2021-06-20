@@ -1,14 +1,3 @@
-### :exclamation: :exclamation: Note
-There are *2* repositories for this project.
-The one you are currently looking at stores the source code of the web app.
-
-For the documentations, notes, prototypes code and team resources, please go to:
-
-**https://gitlab.doc.gold.ac.uk/softproj20/Gardening-Webapp**
-
-
-----
-
 
 **Documentation**
 
