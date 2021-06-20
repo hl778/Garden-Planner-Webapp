@@ -1,0 +1,63 @@
+{
+  "name": "Gardening-Web-App",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A gardening webapp help on managing gardens",
+  "main": "index.js",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^4.0.1",
+    "compression": "^1.7.4",
+    "connect-assets": "^6.0.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.3.1",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "express-sanitizer": "^1.0.5",
+    "express-session": "^1.17.1",
+    "express-useragent": "^1.0.13",
+    "express-validator": "^6.4.1",
+    "flickr-sdk": "^3.9.0",
+    "forever-monitor": "^2.0.0",
+    "getusermedia": "^2.0.1",
+    "helmet": "^3.22.0",
+    "lodash": "^4.17.15",
+    "mongodb": "^3.5.6",
+    "mongoose": "^5.9.10",
+    "mongoose-type-url": "^2.0.0",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.0",
+    "node-pre-gyp": "^0.14.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pexels-api-wrapper": "^1.1.1",
+    "request": "^2.88.2",
+    "semver": "^7.3.2",
+    "three": "^0.115.0",
+    "unsplash-js": "^6.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "css-loader": "^3.5.3",
+    "mocha": "^7.1.2",
+    "style-loader": "^1.2.1",
+    "supertest": "^4.0.2",
+    "terser-webpack-plugin": "^2.3.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "forever": "forever start index.js",
+    "test": "mocha",
+    "build:p": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.doc.gold.ac.uk:softproj20/gardeningwebapp_serverbackup.git"
+  },
+  "author": "Software Team 20",
+  "license": "GNU"
+}

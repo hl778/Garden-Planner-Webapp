@@ -1,0 +1,220 @@
+<!-- login -->
+
+<%- include('./_head'); %>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+
+<body>
+<header>
+    <!--sticky nav bar-->
+    <%- include('./_topNav'); %>
+</header>
+<!--reset password-->
+<% if(typeof hasuser != 'undefined' && hasuser) { %>
+    <div>Password reset successfully.</div>
+<% } %>
+<!--login form-->
+<% if(typeof reset == 'undefined') { %>
+    <main class="mainCont pure-g">
+        <!--back image-->
+        <% if(typeof imageBack != 'undefined') { %>
+            <div class="pure-u-1 backImgLogin">
+                <img src="<%= imageBack %>" alt="Unsplash image">
+            </div>
+            <!--unspalsh author-->
+            <div class="pure-u-1 unsplashCredit">
+                <!--had to credit Author according to the API guideline-->
+                <a href="<%=author%>"
+                   target="_blank" rel="noopener noreferrer" title="by <%=authorName%>">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                        <title>unsplash-logo</title>
+                        <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>
+                    </svg>
+                </span>
+                    <span><%=authorName%></span>
+                </a>
+                <!--unsplash url-->
+                <a id="unsplashTitle" href="<%=urlUnsplash%>" target="_blank">on Unsplash</a>
+            </div>
+        <% }else { %>
+            <!--unspalsh author-->
+            <div class="pure-u-1 unsplashCredit">
+                <!--had to credit Author according to the API guideline-->
+                <a href="https://unsplash.com/@morsha?utm_medium=referral&utm_campaign=photographer-credit&utm_content=creditBadge"
+                   target="_blank" rel="noopener noreferrer" title="by Mor Shani">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                        <title>unsplash-logo</title>
+                        <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>
+                    </svg>
+                </span>
+                    <span>Mor Shani</span>
+                </a>
+                <!--unsplash url-->
+                <a id="unsplashTitle" href="<%=urlUnsplash%>" target="_blank">on Unsplash</a>
+            </div>
+            <div class="pure-u-1 backImgLogin">
+                <img src="/assets/img/siteImg/loginDefault.jpg" alt="Unsplash image">
+            </div>
+        <% } %>
+        <div class="pure-u-1-2 loginBox">
+            <!--main form-->
+            <div class="pure-u-1">
+                <form class="pure-form" method="POST" action="/login">
+                    <fieldset class="mainLoginCont pure-u-1">
+                        <legend class="loginTitle">
+                            <div class="pure-u-1">
+                                <h5 class="Faustina"><span id="loginGarden">Login</span><span class="hideSmallScreen"> to your
+                                <span id="loginGarden">Garden Assistant</span> account</span>
+                                </h5>
+                            </div>
+                        </legend>
+                        <!--info msg-->
+                        <% if(Array.isArray(infos) && infos.length > 0) { %>
+                            <div class="pure-u-20-24 errorRegister">
+                                <% infos.forEach(function(result) { %>
+                                    <% if(typeof result.message != 'undefined') { %>
+                                        <p class="Faustina"><%= result.message %>.</p>
+                                    <% }else { %>
+                                        <p class="Faustina"><%= result %></p>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                        <% } %>
+                        <!--error msg-->
+                        <% if(Array.isArray(errors) && errors.length > 0) { %>
+                            <div class="pure-u-20-24 errorRegister">
+                                <h6 class="Faustina">Please re-enter</h6>
+                                <% errors.forEach(function(result) { %>
+                                    <% if(typeof result.message != 'undefined') { %>
+                                        <p class="Faustina"><%= result.message %>.</p>
+                                    <% }else { %>
+                                        <p class="Faustina"><%= result %></p>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                        <% }else { %>
+                            <p class="Faustina"><%= errors %></p>
+                        <% } %>
+                        <!--CSRF-->
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <!--username-->
+                        <div class="pure-u-1 pure-u-md-1-2 input-field">
+                            <input id="username" class="validate" type="text" name="username" required maxlength="20" autofocus>
+                            <label for="username" class="Caladea labelUser">Username</label>
+                        </div>
+                        <!--password-->
+                        <div class="pure-u-1 pure-u-md-1-2 input-field">
+                            <input class="validate" id="password" type="password" name="password" required maxlength="16">
+                            <label for="password" class="Caladea labelUser">Password</label>
+                        </div>
+                        <!--remember me-->
+                        <p>
+                            <label>
+                                <input type="checkbox" id="remember" name="remember" value="remember">
+                                <span class="Neuton rememberText">Remember me</span>
+                            </label>
+                        </p>
+                        <!--login btn-->
+                        <button type="submit" class="loginBtn pure-button pure-button-primary Faustina">Login</button>
+                        <a href="/users/reset"><p class="forgetPass Neuton">Forget Your Password ?</p></a>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="pure-u-1 hideSmallScreen">
+                <a href="/register"><p class="Neuton noAccount">If you haven't already created a Garden Assistant
+                        account</p></a>
+            </div>
+            <div class="pure-u-1 showOnlySmall">
+                <a href="/register"><p class="Neuton noAccount">Or Create an Account</p></a>
+            </div>
+        </div>
+    </main>
+<% } %>
+<!--reset password form-->
+<% if(typeof reset != 'undefined' && reset == true) { %>
+    <main class="mainCont pure-g">
+        <div class="pure-u-1 backImgLogin">
+            <img src="/assets/img/logo/vector/isolated-layout.svg" alt="webapp logo">
+        </div>
+        <div class="pure-u-1-2 loginBox">
+            <!--main form-->
+            <div class="pure-u-1">
+                <form class="pure-form" method="POST" action="/users/reset">
+                    <fieldset class="mainLoginCont pure-u-1">
+                        <legend class="loginTitle">
+                            <div class="pure-u-1">
+                                <h5 class="Faustina"><span class="resetTitle">RESET</span><span class="hideSmallScreen"> your
+                                    <span id="loginGarden">Garden Assistant</span></span> password
+                                </h5>
+                            </div>
+                        </legend>
+                        <!--error msg-->
+                        <% if(Array.isArray(errors) && errors.length > 0) { %>
+                            <div class="pure-u-20-24 errorRegister">
+                                <h6 class="Faustina">Please re-enter</h6>
+                                <% errors.forEach(function(result) { %>
+                                    <% if(typeof result.message != 'undefined') { %>
+                                        <p class="Faustina"><%= result.message %>.</p>
+                                    <% }else { %>
+                                        <p class="Faustina"><%= result %></p>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                        <% }else { %>
+                            <p class="Faustina"><%= errors %></p>
+                        <% } %>
+                        <!--CSRF-->
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <!--username-->
+                        <% if(typeof nouser != 'undefined' && nouser) { %>
+                            <div class="pure-u-1 noExist"><span
+                                        class="Faustina resetTitle">Error: Username <%= nouser %> does not exist.</span>
+                            </div>
+                        <% } %>
+                        <div class="pure-u-1 pure-u-md-1-2 input-field">
+                            <input id="username" class="validate" type="text" name="username" required maxlength="20" autofocus>
+                            <label for="username" class="Caladea labelUser">Enter Your username</label>
+                        </div>
+                        <!--password-->
+                        <div class="pure-u-1 pure-u-md-1-2 input-field">
+                            <input class="validate" id="password" type="password" name="password" required maxlength="16">
+                            <label for="password" class="Caladea labelUser"><span
+                                        class="hideSmallScreen"> Enter your </span>NEW Password</label>
+                        </div>
+                        <!--login btn-->
+                        <div class="pure-u-1 pure-u-md-1-2">
+                            <button type="submit" class="loginBtn pure-button pure-button-primary Faustina">
+                                Reset Password
+                            </button>
+                        </div>
+                        <p class="forgetPass Neuton">
+                            This WILL reset your password<span
+                                    class="hideSmallScreen">, and WILL NOT require re-type</span>
+                            for simplicity<span class="hideSmallScreen"> of demonstration purpose only.
+                            Since there is no email server/domain allocated, will not use email verification</span>.
+                        </p>
+                        <p class="forgetPass Neuton noExist">
+                            <span class="hideSmallScreen">It WILL auto login after resetting.</span>
+                        </p>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="pure-u-1 hideSmallScreen">
+                <a href="/register"><p class="Neuton noAccount">If you haven't already created a Garden Assistant
+                        account</p></a>
+            </div>
+            <div class="pure-u-1 showOnlySmall">
+                <a href="/register"><p class="Neuton noAccount">Or Create an Account</p></a>
+            </div>
+        </div>
+    </main>
+<% } %>
+
+<%- include('./_footer'); %>
+<script type="text/javascript" src="/js/universe.js"></script>
+
+</body>
+
+</html>

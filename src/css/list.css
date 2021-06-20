@@ -1,0 +1,378 @@
+/*
+ * list database CSS
+*/
+.masterList {
+    width: 100%;
+}
+.mainWrapperList {
+    margin-bottom: 30px;
+}
+/*main section*/
+.listTotal {
+    text-align: center;
+    padding: 10px 10px 0 10px;
+}
+
+/*title*/
+.garTitle {
+    background: linear-gradient(90deg, #fcedcc 40%, #90ee90 0%);
+    text-align: center;
+}
+
+.garTitle .garHead {
+    margin-top: 100px;
+    text-align: center;
+    color: #736f6f;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.gar {
+    color: #009FBC;
+}
+
+/*sub images*/
+.imgAndTitle {
+    text-align: left;
+    position: relative;
+    border-radius: 6px;
+    padding: 5px 15px 5px 15px;
+    margin: 0 0px 20px 10px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 1px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*list img*/
+.listImgWrapper {
+    overflow: hidden;
+    height: 150px;
+}
+
+img.listImg {
+    width: 100%;
+    border-radius: 4px;
+}
+
+img.listImg:hover {
+    cursor: pointer;
+}
+
+/*each individual plant div*/
+.desWrapper {
+
+}
+
+.subTitlePlant {
+    font-weight: bold;
+}
+
+.subTypePlant {
+    color: rgba(22, 22, 22, 0.78);
+    margin-top: -3px;
+    font-style: italic;
+}
+
+.subAuthorPlant a {
+    color: rgba(109, 104, 104, 0.91);
+}
+
+.desPlantList {
+    font-size: medium;
+    margin-top: -8px;
+}
+
+/*add form*/
+.addOptional {
+    color: rgba(128, 179, 72, 0.95);
+}
+.addMasterList {
+    display: none;
+    z-index: 99;
+    border-radius: 10px;
+    padding: 0 0 30px 0;
+    background-color: rgba(226, 244, 245, 0.99);
+    overflow: auto;
+    height: 80%;
+    position: fixed;
+    left: 10%;
+    bottom: 100px;
+    text-align: center;
+}
+
+/*overwrite dropdown overflow*/
+select {
+    padding: 0 10px 0 10px !important;
+    -webkit-padding-end: 10px !important;
+    -webkit-padding-start: 10px !important;
+}
+
+.addFormWrapper {
+    text-align: left;
+}
+
+.button-warning {
+    color: #fafcff;
+    background: rgb(223, 117, 20);
+}
+
+/*float btn*/
+div.activeAddWrapperParent {
+    position: relative;
+    z-index: 999;
+}
+
+button.activeAddWrapper,.activeAddWrapperCollec {
+    position: fixed;
+    bottom: 15px;
+    right: 8px;
+}
+
+.activeAddWrapper,.activeAddWrapperCollec:hover,
+.activeAddWrapper,.activeAddWrapperCollec:focus {
+    transition: 0.5s;
+    box-shadow: inset 0 0 0 2em rgba(203, 114, 170, 0.6);
+    color: #cb72aa;
+}
+
+.activeAddWrapper,.activeAddWrapperCollec {
+    border-radius: 10px;
+    background-color: rgba(127, 200, 117, 0.49);
+    color: #52dd60;
+    transition: 0.25s;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 0.1em 0.8em;
+}
+#addFavo{
+    border-color: #eabe9f;
+    background-color: #efc5aa;
+    padding: 5px;
+    color: #0a0a0a;
+    width: 50px;
+    height: 50px;
+}
+#addReset {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    border-color: #94e087;
+    background-color: #a5f198;
+    bottom: 67px;
+    border-radius: 12px;
+}
+
+.activeAddWrapper,.activeAddWrapperCollec p {
+    color: rgba(72, 66, 66, 0.97);
+}
+
+/*close btn add form*/
+.closeMsg {
+    color: darkorange;
+    text-align: right;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.closeMsg:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    color: rgba(208, 33, 108, 0.96);
+}
+
+/*pagination index*/
+.pagination {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.pagination li {
+    display: inline;
+    text-align: center;
+}
+
+.pagination a:active {
+    outline: none;
+}
+
+.pagination {
+    position: relative;
+}
+
+.pagination:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 40%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0.65) 60%, rgba(0, 0, 0, 0) 100%);
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 40%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0.65) 60%, rgba(0, 0, 0, 0) 100%);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(86, 79, 63, 0.97) 40%, rgba(9, 78, 9, 0.97) 50%, rgba(5, 98, 5, 0.97) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.pagination a {
+    float: left;
+    display: block;
+    text-decoration: none;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    margin: 0 5px;
+    position: relative;
+}
+.pagination li a {
+    color: rgba(102, 105, 105, 0.97);
+}
+.pagination a:hover {
+    transition: 0.5s;
+    color: #fff;
+    background-color: #00b7ff;
+    border-radius: 3px;
+}
+
+.pagination a.active {
+    border-radius: 5px;
+    cursor: default;
+    background: rgba(226, 121, 30, 0.86);
+    color: #fff;
+}
+/*added msg*/
+.addedInfoWrapper {
+    display: none;
+    position: fixed;
+    top: 30%;
+    width: 50%;
+    left: 25%;
+}
+.addedInfoSubWrapper {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+
+    align-items: center;
+    justify-content: center;
+    min-height:150px;
+    border-radius: 10px;
+    background-color: rgba(5, 44, 53, 0.95);
+}
+/* collection added*/
+.addedCollecSubWrapper {
+    text-align: center;
+    min-height:150px;
+    border-radius: 10px;
+    background-color: rgba(160, 221, 155, 0.95);
+}
+.addedSubMeg {
+    font-size: medium;
+}
+.highlightUser {
+    color: #f3b651;
+}
+.closeMsg {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    text-align: right;
+    color: rgba(207, 56, 117, 0.97);
+}
+/*load btn*/
+.loadmoreLiquid {
+    display: inline-block;
+    position: relative;
+    width: 240px;
+    height: 60px;
+    border-radius: 27px;
+    color: #fff;
+    font: 700 14px/60px "Droid Sans", sans-serif;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.loadmoreLiquid .inner {
+    position: relative;
+    z-index: 2;
+}
+.loadmoreLiquid canvas {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    bottom: -50px;
+    left: -50px;
+    z-index: 1;
+}
+.liquidWrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+/*ie<9 btn, incompitable browser*/
+.lowerWrapper {
+    text-align: center;
+    display: none;
+}
+.lowerBtn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.lowerBtn {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+.lowerBtn:hover {
+    transition: 0.5s;
+    background-color: #008CBA;
+    color: white;
+}
+/*no more msg*/
+.noMoreMsg,.moreErrorMsg {
+    display: none;
+    text-align: center;
+    font-size: medium;
+    color: #434545;
+}
+/*select box for add to collection*/
+.blurImg {
+    opacity: 0.2;
+    border: 2px solid red;
+}
+.hideWhenNon {
+    display: none;
+}
+/*logo api*/
+.dictionAPILogoWrapper,.flickrAPILogoWrapper,.dictionAPILogo {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    display: inline-block;
+    max-height: 12px;
+    max-width: 12px;
+}
+.flickrAPILogoWrapper {
+    right: 20px;
+}
+/* helper text */
+.clickText {
+    text-align: center;
+    color: rgba(5, 61, 117, 0.91);
+}

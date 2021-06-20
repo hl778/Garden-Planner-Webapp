@@ -1,0 +1,72 @@
+<!-- search -->
+
+<%- include('./_head'); %>
+<link rel="stylesheet" type="text/css" href="/css/profile.css">
+</head>
+
+<body>
+<header>
+    <!--sticky nav bar-->
+    <%- include('./_topNav'); %>
+</header>
+
+<main class="pure-g">
+
+    <div class="pure-u-1">
+        <% if ((currentUser) && (currentUser.id === user.id)) { %>
+            <a href="/edit" class="">Edit your profile</a>
+        <% } %>
+    </div>
+
+    <div class="pure-u-1">
+        <!--everyone else can see-->
+        <h1 class="Caladea"><%= user.name() %></h1>
+        <% if(user.userGroup === 0) { %>
+            <h3 class="Caladea">User group: admin</h3>
+        <% }else { %>
+            <h3 class="Caladea">User group: user</h3>
+        <% } %>
+        <div class="progileImgWrapper pure-u-5-24">
+            <img class="pure-img" src="https://robohash.org/<%= user.name() %>.png" alt="profile avatar">
+        </div>
+        <h6 class="Faustina">Joined on <%= user.createdAt %></h6>
+    </div>
+    <!--plants-->
+    <div class="pure-u-1">
+        <h5 class="Faustina">Your plants</h5>
+        <% user.userPlantsBackup.forEach(function(plant) { %>
+            <p class="Neuton"><%= plant %></p>
+        <% }); %>
+    </div>
+
+    <!--plants needs to be verified by admin-->
+    <% if(typeof verify != 'undefined') { %>
+        <div class="pure-u-1">
+            <h5 class="Faustina">Please verify the following plants added by users</h5>
+            <% verify.forEach(function(plant) { %>
+                <div>
+                    <% if(plant.imageURL) { %>
+                        <img src="<%= plant.imageURL %>" alt="">
+                    <% }else { %>
+                        <img src="<%= plant.imageDefault %>" alt="">
+                    <% } %>
+                    <p class="Neuton"><%= plant.plantName %></p>
+                    <p class="Neuton"><%= plant.seeding %></p>
+                    <p class="Neuton"><%= plant.flowering %></p>
+                    <p class="Neuton"><%= plant.type %></p>
+                    <p class="Neuton"><%= plant.plantDesc %></p>
+                    <p class="Neuton"><%= plant.createdBy %></p>
+                    <p class="Neuton"><%= plant.verified %></p>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+
+</main>
+
+<%- include('./_footer'); %>
+<script type="text/javascript" src="/js/universe.js"></script>
+<script type="text/javascript" src="/js/profile.js"></script>
+</body>
+</html>
+
