@@ -1,0 +1,432 @@
+/* 
+ * tags:
+    #delete means may be deleted when release
+
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+/* draw boundary for each cell for now, may be delete when release #delete*/
+.drawBox {
+  border-radius: 5px;
+  border-color: black;
+  border-style: solid;
+}
+
+/* Initialise master grid layout */
+.drawPage-grid-container {
+  display: grid;
+  grid-template-columns: minmax(50px, 10%) minmax(50px, 5%) minmax(50px, 5%) minmax(50px, 80%);
+  grid-template-rows: minmax(50px, auto) minmax(50px, auto) minmax(50px, auto) minmax(30px, 30px) minmax(50px, auto) minmax(50px, auto) minmax(50px, auto);
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-gap: 3px 3px;
+}
+
+/* header logo */
+.drawPage-header {
+  grid-area: 1 / 1 / 2 / 5;
+}
+
+/* navigation */
+.drawPage-topButtons {
+  grid-area: 2 / 1 / 3 / 5;
+}
+
+/* canvas/table view switch tabs */
+.drawPage-tabs {
+  grid-area: 3 / 1 / 4 / 5;
+}
+
+/* camera and scene container */
+.mainScene {
+  grid-area: 4 / 4 / 6 / 5;
+  position: relative;
+}
+
+/* container for camera and scene */
+.drawPage-canvasWhole-camera {
+    position: relative;
+}
+
+/* Three.js scene */
+/*.sceneContainer {*/
+/*  grid-area: 4 / 4 / 6 / 5;*/
+/*}*/
+
+
+/* Testing for save canvas button to see if correct part of web page is being screenshot.
+.sceneContainer{
+    background: blue;
+}
+*/
+
+/* CSS for save canvas button and its confirmation message of the drawing being saved. */
+.camera-toggleButton #saveCanvasButton {
+    position: absolute;
+    width: 100px;
+    left: 200px;
+    top: -4px;
+}
+
+.camera-toggleButton #saveStatus {
+    position: absolute;
+    width: 300px;
+    left: 320px;
+    top: -10px;
+}
+
+/* CSS for toggle button and message if camera enabled or not. */
+.camera-toggleButton {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    top: 5px;
+    left: 5px;
+    height: 34px;
+}
+
+.camera-toggleButton #cameraStatus {
+    position: relative;
+    left: 70px;
+    width: 100px;
+}
+
+.camera-toggleButton input {
+    display: none;
+}
+
+.toggleButton {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    border-radius: 50px;
+}
+
+.toggleButton:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 60%;
+}
+
+input:checked + .toggleButton {
+    background-color: #f40d30;
+}
+
+input:checked + .toggleButton:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+/* search panel */
+.drawPage-canvasWhole-panel-search {
+    grid-area: 4 / 1 / 5 / 4;
+}
+
+/* model selection switch tabs */
+.drawPage-canvasWhole-panel-modelListr-tabs {
+    grid-area: 5 / 1 / 6 / 2;
+}
+
+/* model images */
+.drawPage-canvasWhole-panel-modelListr-images {
+    grid-area: 5 / 2 / 6 / 4;
+    padding: 4px;
+    background-color: aliceblue;
+    width: 100%;
+    height: 450px;
+    overflow-x: hidden;
+    overflow-x: auto;
+    /**/
+    overflow-y: auto;
+    text-align: justify;
+    overflow-wrap: break-word;
+}
+
+.plantImg {
+    margin-top: 4px;
+    width: 90%;
+}
+
+.plantImg:hover {
+    cursor: pointer;
+    border-style: solid;
+}
+
+
+/* Style the tab */
+.tabImage {
+    /*float: left;*/
+    /*border: 1px solid #ccc;*/
+    /*background-color: #f1f1f1;*/
+    /*width: 30%;*/
+    /*height: 300px;*/
+}
+
+/* Style the buttons inside the tab */
+.tabImage button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tabImage button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tabImage button.active {
+    background-color: lightsteelblue;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    /*border: 1px solid #ccc;*/
+    /*width: 70%;*/
+    border-left: none;
+    /*height: 300px;*/
+}
+
+
+/* bottom navigation */
+.drawPage-navigatorBottom {
+    grid-area: 6 / 1 / 7 / 5;
+}
+
+/* bottom logo */
+.drawPage-Logo {
+    grid-area: 7 / 1 / 8 / 5;
+}
+
+/* camera */
+video#liveCamera {
+  width: 100%;
+  height: 100%;
+  z-index: -33;
+  position: absolute;
+    top: 0px;
+    left: 0px;
+    background-size: cover;
+}
+
+/* Three scene itself */
+#sceneContainer {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* CSS for drawing feature instructions, appears as pop-up tips. */
+#drawFeatureInstructions {
+    padding: 25px;
+    background-color: rgba(50, 205, 50, 0.90);
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    height: 190px;
+    width: 800px;
+    font-size: 30px;
+    left: 50%;
+    margin-left: -300px;
+    top: 50%;
+    margin-top: -200px;
+    z-index: +1;
+}
+
+.closebtn1 {
+    margin-left: 25px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 50px;
+    line-height: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn1:hover {
+    color: #f40d30;
+}
+
+#Tip1 {
+    display: none;
+    padding: 25px;
+    background-color: rgba(50, 205, 50, 0.90);
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    height: 200;
+    width: 200px;
+    font-size: 22px;
+    left: 50%;
+    margin-left: -500px;
+    top: 50%;
+    margin-top: 0px;
+    z-index: +1;
+}
+
+#Tip2 {
+    display: none;
+    padding: 25px;
+    background-color: rgba(50, 205, 50, 0.90);
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    height: 200;
+    width: 300px;
+    font-size: 22px;
+    left: 50%;
+    margin-left: -510px;
+    top: 50%;
+    margin-top: -300px;
+    z-index: +1;
+}
+
+#Tip3 {
+    display: none;
+    padding: 25px;
+    background-color: rgba(50, 205, 50, 0.90);
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    height: 200;
+    width: 300px;
+    font-size: 22px;
+    left: 50%;
+    margin-left: -380px;
+    top: 50%;
+    margin-top: -300px;
+    z-index: +1;
+}
+
+#Tip4 {
+    display: none;
+    padding: 25px;
+    background-color: rgba(50, 205, 50, 0.90);
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    height: 200;
+    width: 300px;
+    font-size: 22px;
+    left: 50%;
+    margin-left: 360px;
+    top: 50%;
+    margin-top: -90px;
+    z-index: +1;
+}
+
+#Tip5 {
+    display: none;
+    padding: 25px;
+    background-color: rgba(50, 205, 50, 0.90);
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    height: 200;
+    width: 300px;
+    font-size: 22px;
+    left: 50%;
+    margin-left: 100px;
+    top: 50%;
+    margin-top: -300px;
+    z-index: +1;
+}
+
+#AR_Tip {
+    display: none;
+    padding: 25px;
+    background-color: rgba(244, 13, 48, 0.90);
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    height: 200;
+    width: 600px;
+    font-size: 22px;
+    left: 50%;
+    margin-left: -300px;
+    top: 50%;
+    margin-top: -350px;
+    z-index: +1;
+}
+
+/* CSS for show optimal sunlight button. */
+.camera-toggleButton #optimalSunlight {
+    position: absolute;
+    width: 160px;
+    left: 600px;
+    top: -4px;
+}
+
+
+/* CSS for optimal sunlight. First three ids are the grid lines. The #object can be moved and the #sun is fixed. */
+#grid1 {
+    cursor: pointer;
+    visibility: hidden;
+    position: absolute;
+    margin-top: -400px;
+    margin-left: 300px;
+    width: 150px;
+    height: 200px;
+}
+
+#grid2 {
+    visibility: hidden;
+    position: absolute;
+    margin-top: -400px;
+    margin-left: 443px;
+    width: 150px;
+    height: 200px;
+}
+
+#grid3 {
+    visibility: hidden;
+    position: absolute;
+    margin-top: -400px;
+    margin-left: 585px;
+    width: 150px;
+    height: 200px;
+}
+
+#plantObject {
+    cursor: pointer;
+    visibility: hidden;
+    width: 100px;
+    height: 70px;
+}
+
+#sun {
+    cursor: pointer;
+    visibility: hidden;
+    position: absolute;
+    margin-top: -520px;
+    margin-left: 325px;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,40 @@
+/*
+ * 404 CSS
+*/
+
+html, body {
+    height: 90%;
+}
+.background-image {
+    background-color: #FFFFFF;
+}
+.masterWrapper {
+    text-align: center;
+    margin-top: 40px;
+    background-image: url(/usr/520/assets/img/siteImg/defaultPlantsImg.png);
+    background-size: cover;
+    height: 100%;
+}
+main {
+    padding: 30px 10px 10px 10px;
+}
+.backHome{
+    background-color: rgba(15, 157, 88, 0.12);
+    padding: 10px;
+    border-radius: 10px;
+}
+.backHome:hover {
+    transition: 0.5s;
+    color: #ffffff;
+    cursor: pointer;
+    background-color: rgba(133, 190, 112, 0.95);
+}
+a.backHome:visited {
+    color: #0a0a0a;
+}
+a.backHome:link {
+    color: #0a0a0a;
+}
+.infoText {
+    font-size: medium;
+}

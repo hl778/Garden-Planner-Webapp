@@ -1,0 +1,123 @@
+<!-- register -->
+
+<%- include('./_head'); %>
+<link rel="stylesheet" type="text/css" href="/css/libs/vidbg.css">
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<link rel="stylesheet" type="text/css" href="css/register.css">
+</head>
+
+<body>
+<header>
+    <!--sticky nav bar-->
+    <%- include('./_topNav'); %>
+</header>
+
+<!--login form-->
+<main class="mainCont pure-g">
+    <!--if fetched data from Pexel API-->
+    <% if(typeof passedInEjsVariable != 'undefined' && passed == true) { %>
+        <!--Pexel author-->
+        <div class="pure-u-1 unsplashCredit">
+            <!--had to credit Author according to the API guideline-->
+            <a href="<%= passedInEjsVariable.originalURL %>"
+               target="_blank" rel="noopener noreferrer" title="<%= passedInEjsVariable.authorName %>">
+                <span></span>
+                <span><%= passedInEjsVariable.authorName %></span>
+                <!--Pexel url-->
+                <a id="unsplashTitle" href="https://www.pexels.com/" target="_blank">on Pexels</a>
+            </a>
+        </div>
+    <% }else if(typeof passedInEjsVariable == 'undefined' || passed == false) { %>
+        <!--if failed fetching data from Pexel API-->
+        <!--Pexel author-->
+        <div class="pure-u-1 unsplashCredit">
+            <!--had to credit Author according to the API guideline-->
+            <a href="https://www.pexels.com/video/pink-petunia-on-a-windy-day-1260766/"
+               target="_blank" rel="noopener noreferrer" title="by Zuzanna Musial">
+                <span></span>
+                <span>Zuzanna Musial</span>
+                <!--Pexel url-->
+                <a id="unsplashTitle" href="https://www.pexels.com/" target="_blank">on Pexels</a>
+            </a>
+        </div>
+    <% } %>
+
+    <!--main form-->
+    <div class="pure-u-1-2 loginBox">
+        <div class="pure-u-1">
+            <form class="pure-form" method="POST" action="/register">
+                <fieldset class="mainLoginCont pure-u-1">
+                    <legend class="loginTitle">
+                        <div class="pure-u-1">
+                            <h5 class="Faustina"><span class="hideSmallScreen">
+                                    Please enter your details, to <span id="loginGarden">register</span>
+                                    for a free <span id="loginGarden">Garden Assistant</span> account</span>
+                                <span class="showOnlySmall">Register</span>
+                            </h5>
+                        </div>
+                    </legend>
+                    <!--error msg-->
+                    <% if(Array.isArray(errors) && errors.length > 0) { %>
+                        <div class="pure-u-20-24 errorRegister">
+                            <h6 class="Faustina">Please re-enter</h6>
+                            <% errors.forEach(function(result) { %>
+                                <% if(typeof result.message != 'undefined') { %>
+                                    <p class="Faustina"><%= result.message %>.</p>
+                                <% }else { %>
+                                    <p class="Faustina"><%= result %></p>
+                                <% } %>
+                            <% }) %>
+                        </div>
+                    <% }else { %>
+                            <p class="Faustina"><%= errors %></p>
+                    <% } %>
+                    <!--CSRF-->
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <!--username-->
+                    <div class="pure-u-1 pure-u-md-1-2 input-field">
+                        <input id="username" class="validate" type="text" name="username" required maxlength="20" autofocus>
+                        <label for="username" class="Caladea labelUser">Username *</label>
+                    </div>
+                    <!--password-->
+                    <div class="pure-u-1 pure-u-md-1-2 input-field">
+                        <input class="validate" id="password" type="password" name="password" required maxlength="16">
+                        <label for="password" class="Caladea labelUser">Password *</label>
+                    </div>
+                    <!--email-->
+                    <div class="pure-u-1 pure-u-md-1-2 input-field">
+                        <input class="validate" id="email" type="email" name="email" maxlength="100">
+                        <label for="email" class="Caladea labelUser">Email (Optional)</label>
+                    </div>
+                    <!--PostCode-->
+                    <div class="pure-u-1 pure-u-md-1-2 input-field">
+                        <input class="validate" id="postCode" type="text" name="postCode" maxlength="8">
+                        <label for="postCode" class="Caladea labelUser">Post Code (Optional)</label>
+                    </div>
+                    <!--signup btn-->
+                    <button type="submit"
+                            class="loginBtn pure-button pure-button-primary Faustina pure-u-1 pure-u-md-12-24">
+                        Create Account
+                    </button>
+                    <p class="pure-u-1 Neuton termsCon">* By creating an account you agree to our
+                        <a href="">Terms and Conditions.</a></p>
+                    <a href="/login"><p class="forgetPass Neuton">Already had an account?</p></a>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!--store backend variable json-->
+<% if(typeof passedInEjsVariable != 'undefined' && passedInEjsVariable.videoURL) { %>
+    <span id='variableJSON' hidden>
+    <%= JSON.stringify(passedInEjsVariable); %>
+</span>
+<% } %>
+
+<%- include('./_footer'); %>
+<script type="text/javascript" src="/js/universe.js"></script>
+<script type="text/javascript" src="/js/libs/vidbg.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>
+</body>
+
+</html>

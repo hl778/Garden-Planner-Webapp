@@ -1,0 +1,43 @@
+<!-- calendar -->
+<!-- credits: dhtmlxscheduler-->
+
+
+<%- include('./_headNonMater'); %>
+<script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
+<script src="https://cdn.dhtmlx.com/scheduler/edge/ext/dhtmlxscheduler_year_view.js" ></script>
+<link href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_flat.css"
+      rel="stylesheet" type="text/css" charset="utf-8">
+<link rel="stylesheet" type="text/css" href="/css/calendar.css">
+</head>
+
+<body>
+<header>
+    <!--sticky nav bar-->
+    <%- include('./_topNav'); %>
+</header>
+
+<div class="calendarWrapper">
+    <!-- scheduler -->
+    <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+        <div class="dhx_cal_navline">
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_today_button"></div>
+            <div class="dhx_cal_date"></div>
+            <div class="dhx_cal_tab" name="day_tab"></div>
+            <div class="dhx_cal_tab" name="week_tab"></div>
+            <div class="dhx_cal_tab" name="month_tab"></div>
+            <div class="dhx_cal_tab" name="year_tab" style="right:280px;"></div>
+        </div>
+        <div class="dhx_cal_header">
+        </div>
+        <div class="dhx_cal_data">
+        </div>
+    </div>
+</div>
+<%- include('./_footer'); %>
+
+<script type="text/javascript" src="/js/universe.js"></script>
+<script type="text/javascript" src="/js/calendar.js"></script>
+</body>
+</html>
