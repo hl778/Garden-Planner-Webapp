@@ -2,7 +2,7 @@
 
 
 
-#### Structure
+### Structure
 
 ------------------
 
@@ -21,7 +21,7 @@ This web app contains seven pages:
 - User Profile
 - Login/Signup
 
-#### Teck Stack
+### Teck Stack
 
 --------------
 
