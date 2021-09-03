@@ -1,0 +1,73 @@
+<!-- header -->
+
+<!--responsive menu-->
+<div class="indexHeaderWrapper pure-g" id="menu">
+    <div class="pure-u-1 pure-u-md-1-24">
+        <div class="pure-menu">
+            <!--tiny nav logo-->
+            <a href="/" class="pure-menu-heading custom-brand">
+                <img class="navTinyLogo pure-u-1" src="/assets/img/logo/vector/isolated-monochrome-black.svg"
+                     alt="navigation bar logo">
+            </a>
+            <!--toggle icon-->
+            <a href="#" class="indexMobileToggle" id="toggle">
+                <!--three line combined as a mobile menu toggle icon-->
+                <s class="bar"></s>
+                <s class="bar"></s>
+                <s class="bar"></s>
+            </a>
+        </div>
+    </div>
+    <!--main menu items-->
+    <div class="pure-u-1 pure-u-md-15-24">
+        <div class="pure-menu pure-menu-horizontal can-transform">
+            <ul class="pure-menu-list onlyPassMain">
+                <!--if logged in-->
+                <% if(currentUser) { %>
+                    <li class="pure-menu-item stickNavMainEle"><a href="/" class="pure-menu-link Faustina">Dashboard</a>
+                    </li>
+                <% }else { %>
+                    <li class="pure-menu-item stickNavMainEle"><a href="/" class="pure-menu-link Faustina">Home</a></li>
+                <% } %>
+                <li class="pure-menu-item stickNavMainEle"><a href="https://doc.gold.ac.uk/usr/520/draw" class="pure-menu-link Faustina">Draw Garden</a></li>
+                <li class="pure-menu-item stickNavMainEle"><a href="/search" class="pure-menu-link Faustina">Plant Search</a></li>
+                <li class="pure-menu-item stickNavMainEle"><a href="/calendar" class="pure-menu-link Faustina">Calendar</a></li>
+                <li class="pure-menu-item stickNavMainEle"><a href="/list" class="pure-menu-link Faustina">Database List</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--user authentication menu item-->
+    <div class="pure-u-8-24 overflowJack">
+        <div class="pure-menu pure-menu-horizontal indexRightMostNav can-transform">
+            <ul class="pure-menu-list">
+                <!--if logged in-->
+                <% if(currentUser) { %>
+                    <li class="pure-menu-item stickNavMainEleSub">
+                        <a href="/users/profile/<%= currentUser.username %>" class="pure-menu-link Faustina hiJack">
+                            Hi, <%= currentUser.username %>
+                        </a>
+                    </li>
+                    <li class="pure-menu-item stickNavMainEleSub">
+                        <button class="Faustina pure-button navRightBtnOut" onclick="location.href='/usr/520/logout'"
+                                type="button">Logout
+                        </button>
+                    </li>
+                <% } %>
+                <!--if NOT logged in-->
+                <% if(!currentUser) { %>
+                    <li class="pure-menu-item stickNavMainEleSub">
+                        <button class="Faustina pure-button navRightBtnIn" onclick="location.href='/usr/520/login'"
+                                type="button">Login
+                        </button>
+                    </li>
+                    <li class="pure-menu-item stickNavMainEleSub">
+                        <button class="Faustina pure-button navRightBtnSign" onclick="location.href='/usr/520/register'"
+                                type="button">Sign up
+                        </button>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</div>

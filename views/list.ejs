@@ -1,0 +1,318 @@
+<!-- list database -->
+
+<%- include('./_head'); %>
+<link rel="stylesheet" type="text/css" href="/css/list.css">
+</head>
+
+<body>
+<header>
+    <!--sticky nav bar-->
+    <%- include('./_topNav'); %>
+</header>
+<div class="masterList pure-g">
+    <main class="mainWrapperList pure-u-1">
+        <div class="garTitle pure-u-1">
+            <a href="/list"><h3 class="garHead Caladea"><span class="hideSmallScreen">
+                All the plants currently stored on our </span>
+                    <span class="gar">Database</span>
+                </h3></a>
+        </div>
+        <!--index pagination-->
+        <div class="pure-u-1 indexWrapper">
+            <ul class="pagination pure-u-1"></ul>
+        </div>
+        <% if(typeof listFlashMessage == 'undefined') { %>
+        <form class="resultForm" action="users/input_userPlants" method="POST">
+            <!--helper text-->
+            <div class="pure-u-1 ">
+            <p class="Faustina clickText">
+                Click <b>image</b> to select and add to your collection.
+            </div>
+            <!--Prevent CSRF-->
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <!--last visited URL-->
+            <input type="hidden" name="lastVisitedURL" value="<%= lastVisitedURL %>">
+            <!--list plants-->
+            <div class="pure-u-1 listTotal">
+                <!--each plant-->
+                <% availablePlants.forEach(function(plants){ %>
+                    <div class="pure-u-1 pure-u-sm-11-24 pure-u-md-11-24 imgAndTitle">
+                        <!--plant image-->
+                        <div class="pure-u-6-24 listImgWrapper">
+                            <!--if has generated img-->
+                            <% if(plants.imageURL) { %>
+                                <img class="pure-img listImg" src="<%= plants.imageURL %>">
+                            <% }else { %>
+                                <!--use default placeholder img-->
+                                <img class="pure-img listImg" src="<%= plants.imageDefault %>">
+                            <% } %>
+                        </div>
+                        <!--plant text -->
+                        <div class="desWrapper pure-u-17-24">
+                            <h6 class="Faustina subTitlePlant"><%= plants.plantName %></h6>
+                            <p class="subTypePlant Faustina"><%= plants.type %></p>
+                            <p class="subAuthorPlant Faustina"><a href="/users/profile/<%= plants.createdBy %>">by <%= plants.createdBy %></a></p>
+                            <article class="desPlantList">
+                                <p class="Neuton"><%= plants.plantDesc%></p>
+                            </article>
+                        </div>
+                        <!--logo from dictionary API-->
+                        <% if(plants.plantDescFromAPI) { %>
+                            <div class="dictionAPILogoWrapper tooltipped" data-position="top" data-tooltip="Text from Merriam-Webster">
+                                            <img class="dictionAPILogo"
+                                                 src="https://dictionaryapi.com/images/info/branding-guidelines/MWLogo_DarkBG_120x120_2x.png"
+                                                 alt="dictionaryapi Logo">
+                                        </div>
+                        <% } %>
+                        <!--logo from flickr API-->
+                        <% if(plants.imageURLFromAPI) { %>
+                            <div class="flickrAPILogoWrapper tooltipped" data-position="top" data-tooltip="Image from Flickr">
+                                <img class="dictionAPILogo"
+                                     src="/assets/img/siteImg/flickrlogo.jpg"
+                                     alt="flickr Logo">
+                            </div>
+                        <% } %>
+                        <!--checkbox-->
+                        <div class="subCheck" hidden>
+                            <label>
+                                <input type="checkbox" class="filled-in checkboxSub" name="userPlants[]"
+                                       value="<%= plants.plantName %>">
+                                <span class="labelReplace"></span>
+                            </label>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            <!--no more msg-->
+            <div class="pure-u-1 noMoreMsg">
+                <p class="Neuton">There is no more...</p>
+            </div>
+            <!--ajax load more error msg-->
+            <div class="pure-u-1 moreErrorMsg">
+                <p class="Neuton">Some error when loading...</p>
+            </div>
+            <!--load more btn-->
+            <div class="pure-u-1 liquidWrapper">
+                <a href="" class="loadmoreLiquid shoudLoadMore">
+                    <span class="inner Caladea">Load More</span>
+                </a>
+            </div>
+            <!--load more for incompatible browser-->
+            <div class="pure-u-1 lowerWrapper">
+                <button class="lowerBtn shoudLoadMore">Load More</button>
+            </div>
+            <!--side btn-->
+            <div class="pure-g activeAddWrapperParent">
+                    <button type="submit" id="addFavo" data-position="left" data-tooltip="Add to your collection"
+                            class="tooltipped activeAddWrapperCollec pure-button pure-button-primary Faustina collecBtn hideWhenNon">
+                        <span class="Faustina"><i class="fas fa-star"></i> </span> <b><span id="countCheck"></span></b>
+                    </button>
+                    <button type="button" id="addReset" data-position="left" data-tooltip="Clear selection"
+                            class="tooltipped activeAddWrapperCollec button-activeAdd pure-button Faustina resetBtn hideWhenNon">
+                        <i class="fas fa-redo-alt"></i>
+                    </button>
+            </div>
+        </form>
+        <% }else { %>
+            <!--if no plant in database-->
+            <div class="pure-u-1 imgAndTitle">
+                <h5 class="Caladea"><%= listFlashMessage %></h5>
+            </div>
+        <% } %>
+    </main>
+
+    <!--plant add form-->
+    <div class="pure-u-20-24 addMasterList" id="addFormMasterId">
+        <!--close btn-->
+        <div class="pure-u-1 closeMsg">
+            Close <i class="fas fa-times-circle"></i>
+        </div>
+        <!--will be submitted using ajax or POST in js file-->
+        <form id="addFormWrapper" class="pure-form addFormWrapper pure-u-1-2"
+              method="POST" action="/users/addPlants">
+            <legend class="addTitle pure-u-1">
+                <h5 class="Caladea">Add plant</h5>
+            </legend>
+            <!--name-->
+            <div class="input-field">
+                <input type="text" id="plantName" class="validate" name="plantName"
+                       required maxlength="100" autofocus>
+                <label for="plantName" class="Faustina">Plant name *</label>
+            </div>
+            <!--type-->
+            <label for="type" class="Faustina">Type *</label>
+            <select id="type" name="type">
+                <option>Flower</option>
+                <option>Vegetable</option>
+            </select>
+            <!--seeding-->
+            <fieldset class="pure-group">
+                <p class="Faustina addOptional">
+                    <i class="fas fa-info"><i> Below are optional fields</i></i></p>
+                <!--seeding start date-->
+                <div class="input-field">
+                    <input type="text" id="seeding_start_date" class="datepicker"
+                           name="seeding_start_date">
+                    <label for="seeding_start_date" class="Faustina">Seeding start date</label>
+                </div>
+                <!--seeding end date-->
+                <div class="input-field">
+                    <input type="text" id="seeding_end_date" class="datepicker"
+                           name="seeding_end_date">
+                    <label for="seeding_end_date" class="Faustina">Seeding end date</label>
+                </div>
+                <!--seeding color-->
+                <label for="seeding_color" class="Faustina">Seeding color Code</label>
+                <select id="seeding_color" name="seeding_color">
+                    <option>Default</option>
+                    <option>Red</option>
+                    <option>Green</option>
+                    <option>Yellow</option>
+                </select>
+            </fieldset>
+
+            <!--flowering-->
+            <fieldset class="pure-group">
+                <!--flowering start date-->
+                <div class="input-field">
+                    <input type="text" id="flowering_start_date" class="datepicker"
+                           name="flowering_start_date">
+                    <label for="flowering_start_date" class="Faustina">Flowering start date</label>
+                </div>
+                <!--flowering end date-->
+                <div class="input-field">
+                    <input type="text" id="flowering_end_date" class="datepicker"
+                           name="flowering_end_date">
+                    <label for="flowering_end_date" class="Faustina">Flowering end date</label>
+                </div>
+                <!--flowering color-->
+                <label for="flowering_color" class="Faustina">Flowering color Code</label>
+                <select id="flowering_color" name="flowering_color">
+                    <option>Default</option>
+                    <option>Red</option>
+                    <option>Green</option>
+                    <option>Yellow</option>
+                </select>
+            </fieldset>
+            <!--descriptions-->
+            <div class="input-field pure-u-1">
+                <textarea id="plantDesc" name="plantDesc" class="materialize-textarea"
+                          placeholder="Leave blank to auto generate"></textarea>
+                <label for="plantDesc">Some description (auto expands)</label>
+            </div>
+            <!--image-->
+            <p>
+                <label>
+                    <input type="checkbox" class="filled-in" checked="checked"
+                           id="autoImg" name="autoImg" value="true">
+                    <span class="Faustina">Auto generate image (default on)</span>
+                </label>
+            </p>
+            <!--CSRF-->
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <!--last visited-->
+            <input type="hidden" name="lastVisitedURL" value="<%= lastVisitedURL %>">
+            <!--button group-->
+            <div class="pure-button-group" role="group" aria-label="...">
+                <!--2 different behaviours with admin or other user group-->
+                <% if(currentUser && currentUser.username == 'admin') { %>
+                    <button type="submit" id="buttonAdmin"
+                            class="pure-button pure-button-primary Faustina">
+                        Add to Database
+                    </button>
+                <% }else { %>
+                    <button type="submit" id="buttonUser"
+                            class="pure-button pure-button-primary Faustina">
+                        Add to Database
+                    </button>
+                <% } %>
+                <button type="button" class="button-warning pure-button Faustina" id="listReset">
+                    Reset
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--active form button-->
+<div class="pure-g activeAddWrapperParent" id="masterAddBtnId">
+    <div class="pure-u-1-24">
+        <button type="button" class="activeAddWrapper button-activeAdd pure-button Faustina">
+            <p class="Faustina">Add Plants to DB</p>
+        </button>
+    </div>
+</div>
+<!--plants added to database msg-->
+<% if(errors.length > 0 || infos.length > 0) { %>
+    <div class="pure-g ifHasAdded">
+        <div class="pure-u-1 addedInfoWrapper">
+            <div class="pure-u-1 addedInfoSubWrapper">
+                <!--if its schema error-->
+                <!--schema and regular error has different structures-->
+                <% errors.forEach(function(i) { %>
+                    <% if(typeof i.message != 'undefined') { %>
+                        <p class="highlightUser Faustina">
+                            <i class="fas fa-info"></i> <%= i.message %>
+                        </p>
+                    <% }else { %>
+                        <p class="highlightUser Faustina">
+                            <i class="fas fa-info"></i> <%= i %>
+                        </p>
+                    <% } %>
+                <% }); %>
+                <% infos.forEach(function(i) { %>
+                    <p class="highlightUser Faustina">
+                        <i class="fas fa-seedling"></i> <%= i %>
+                    </p>
+                <% }); %>
+            </div>
+            <div class="pure-u-1 closeMsg Faustina">
+                Close <i class="fas fa-times-circle"></i>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<!--plants added to collection msg-->
+<% if(carriers.length>0) { %>
+    <div class="pure-g ifHasAdded">
+        <div class="pure-u-1 addedInfoWrapper">
+            <div class="pure-u-1 addedCollecSubWrapper">
+                <h5 class="Faustina">Plants added to your collection successfully.</h5>
+                <!--if new plants been added, without duplicate, need to + the added number-->
+                <!--since the returned updatedUser object is the old one-->
+                <% if(carriers[0].countUnique == 0) { %>
+                    <p class="Neuton addedSubMeg">Now you have <span class="addedSubMeg highlightUser Neuton">
+                    <%= carriers[0].updatedUser.userPlantsBackup.length + carriers[0].originalSelectedNumber %>
+                </span> plants (no duplicates).</p>
+                <% }else { %>
+                    <p class="Neuton addedSubMeg">Now you have <span class="addedSubMeg highlightUser Neuton">
+                    <%= carriers[0].updatedUser.userPlantsBackup.length %>
+                </span> plants (no duplicates).</p>
+                <% } %>
+                <!--if duplicates selected-->
+                <% if(carriers[0].countUnique && carriers[0].countUnique != 0) { %>
+                    <% if(carriers[0].countUnique == 1) { %>
+                        <p class="addedSubMeg Neuton"><%= carriers[0].countUnique %> of the selected plants is already in your
+                            collection.</p>
+                    <% }else { %>
+                        <p class="addedSubMeg Neuton"><%= carriers[0].countUnique %> of the selected plants are already in your
+                            collection.</p>
+                    <% } %>
+                <% } %>
+                <p class="addedSubMeg Neuton">You can go to <a href="/users/profile/<%= currentUser.username %>">your
+                        Profile Page</a> to check.</p>
+            </div>
+            <div class="pure-u-1 closeMsg Faustina">
+                Close <i class="fas fa-times-circle"></i>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<%- include('./_footer'); %>
+<script type="text/javascript" src="/js/universe.js"></script>
+<script type="text/javascript" src="/js/helper_stickyAwayFromFooter.js"></script>
+<script type="text/javascript" src="/js/helper_clickOutsideClose.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!--Completed-->
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Draw - Garden Assistant</title>
+    <!--	<base href="" target="_blank">-->
+    <meta charset="utf-8">
+    <meta content="A gardening assistant with AR feature." name="description">
+    <meta content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Chivo&display=swap" rel="stylesheet">
+    <!-- CSS normalize -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
+          type="text/css">
+    <!-- style css -->
+    <link href="css/drawPage.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<!-- three build -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js" type="text/javascript"></script>
+<!-- three module build -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.module.js" type="module"></script>
+<!-- drag and drop -->
+<script src="js/libs/DragControls.js" type="text/javascript"></script>
+<!-- load models -->
+<script src="js/libs/OBJLoader.js" type="text/javascript"></script>
+<!-- load materials -->
+<script src="js/libs/MTLLoader.js" type="text/javascript"></script>
+<!-- FPS stats -->
+<script src="js/libs/Stats.js" type="text/javascript"></script>
+<!-- all the helper functions -->
+<script src="js/libs/util.js" type="text/javascript"></script>
+<!-- GUI control functions -->
+<script src="js/libs/dat.gui.js" type="text/javascript"></script>
+<script src="js/libs/SceneUtils.js" type="text/javascript"></script>
+<!-- use mouse to control camera -->
+<script charset="UTF-8" src="js/libs/TrackballControls.js" type="text/javascript"></script>
+<!--	<script type="text/javascript" charset="UTF-8" src="js/TransformControls.js"></script>-->
+
+<!-- master container, contains everything -->
+<div class="drawPage-grid-container ">
+    <div id="drawFeatureInstructions">
+        <span class="closebtn1"
+              onclick="document.getElementById('drawFeatureInstructions').style.display='none'; document.getElementById('Tip1').style.display='inline';">&times;</span>
+        <strong>Let's start designing your garden! Please read the following pop-up tips. Once you have read a tip
+            simply click on the x in the right-hand corner to move onto the next tip!</strong>
+    </div>
+
+    <div id="Tip1">
+        <span class="closebtn1"
+              onclick="document.getElementById('Tip1').style.display='none'; document.getElementById('Tip2').style.display='inline';">&times;</span>
+        <strong>Scroll through the list of plants then drag and drop your chosen plant onto your canvas.</strong>
+    </div>
+
+    <div id="Tip2">
+        <span class="closebtn1"
+              onclick="document.getElementById('Tip2').style.display='none'; document.getElementById('Tip3').style.display='inline';">&times;</span>
+        <strong>Toggle button OFF to view grid layout and toggle button ON to view AR camera view.</strong>
+    </div>
+
+    <div id="Tip3">
+        <span class="closebtn1"
+              onclick="document.getElementById('Tip3').style.display='none'; document.getElementById('Tip4').style.display='inline';">&times;</span>
+        <strong>Click on 'Save Garden Drawing' to save and download your canvas.</strong>
+    </div>
+
+    <div id="Tip4">
+        <span class="closebtn1"
+              onclick="document.getElementById('Tip4').style.display='none'; document.getElementById('Tip5').style.display='inline';">&times;</span>
+        <strong>To edit a plant on your canvas, select the plant and use the above options.</strong>
+    </div>
+
+    <div id="Tip5">
+        <span class="closebtn1" onclick="document.getElementById('Tip5').style.display='none';">&times;</span>
+        <strong>Click on 'Show Optimal Sunlight' to see how the optimal sunlight position feature works.</strong>
+    </div>
+
+    <div id="AR_Tip">
+        <span class="closebtn1" onclick="document.getElementById('AR_Tip').style.display='none';">&times;</span>
+        <strong>This is the AR view. Focus your device camera to the area of your garden where you would like to see
+            your chosen plants(s).</strong>
+    </div>
+
+
+    <!-- head title -->
+    <div class="drawPage-header drawBox">Header</div>
+    <!-- top navigation -->
+    <div class="drawPage-topButtons drawBox">topButtons such as backtoHome</div>
+    <!-- control tabs -->
+    <div class="drawPage-tabs drawBox">
+        <!-- toggle switch and camera status message -->
+        <label class="camera-toggleButton">
+            <input type="checkbox">
+            <span class="toggleButton"></span>
+            <div id="cameraStatus">Canvas View - Camera OFF</div>
+            <!-- save canvas button -->
+            <p id="saveStatus"></p>
+            <button id="saveCanvasButton" onclick="saveCanvas()">Save Garden Drawing</button>
+            <button id="optimalSunlight" onclick="showOptimalSunlight()">Show Optimal Sunlight</button>
+        </label>
+    </div>
+    <!--scene and web cam container-->
+    <div class="mainScene drawBox">
+        <!-- Scene container -->
+        <div class="sceneContainer drawBox" id="sceneContainer"></div>
+        <!-- Camera container -->
+        <video autoplay id="liveCamera">Your browser does not support the video tag.</video>
+    </div>
+    <!-- search box -->
+    <div class="drawPage-canvasWhole-panel-search drawBox">search</div>
+    <!-- switch between plants tabs -->
+    <div class="drawPage-canvasWhole-panel-modelListr-tabs drawBox">tabs
+        <div class="tabImage">
+            <button class="tablinks" onclick="openPlant(event, 'Flowers')" id="defaultOpen">Flowers</button>
+            <button class="tablinks" onclick="openPlant(event, 'Plants')">Plants</button>
+            <button class="tablinks" onclick="openPlant(event, 'Tools')">Tools</button>
+        </div>
+
+
+    </div>
+    <!-- plants images -->
+    <div class="drawPage-canvasWhole-panel-modelListr-images drawBox">images
+
+        <div id="Flowers" class="tabcontent">
+
+            <!--        <img src="assets/img/coleus.png" class="plantImg" id="coleus">-->
+            <img src="assets/img/dahlia.png" class="plantImg" id="dahlia">
+            <img src="assets/img/dahlia_light_pink.png" class="plantImg" id="dahlia_light_pink">
+            <img src="assets/img/forgetMeNot.png" class="plantImg" id="forgetMeNot">
+            <!--        <img src="assets/img/sensitivePlant.png" class="plantImg" id="sensitivePlant">-->
+            <!--        <img src="assets/img/lupis.png" class="plantImg" id="lupis">-->
+            <img src="assets/img/sunflower.png" class="plantImg" id="sunflower">
+            <img src="assets/img/glebionisSegetum.png" class="plantImg" id="glebionisSegetum">
+        </div>
+
+        <div id="Plants" class="tabcontent">
+            <img src="assets/img/cactus.png" class="plantImg" id="cactus">
+            <!--        <img src="assets/img/gerbera.png" class="plantImg" id="gerbera">-->
+
+            <img src="assets/img/grass.png" class="plantImg" id="grass">
+            <!--        <img src="assets/img/leafPlants.png" class="plantImg" id="leafPlants">-->
+        </div>
+
+        <div id="Tools" class="tabcontent">
+
+
+        <!--        <img src="assets/img/pumpkin.png" class="plantImg" id="pumpkin">-->
+            <img src="assets/img/terracottaPot.png" class="plantImg" id="terracottaPot">
+            <!--        <img src="assets/img/tree.png" class="plantImg" id="tree">-->
+        </div>
+
+
+    </div>
+    <!-- bottom navigation bar -->
+    <div class="drawPage-navigatorBottom drawBox">navigatorBottom</div>
+    <!-- footer -->
+    <div class="drawPage-Logo drawBox">Footer</div>
+</div>
+
+<!-- Optimal Sunlight Groundwork -->
+<img src="assets/img/sun.svg" id="sun">
+<img src="assets/img/optimalSunlightPosition.svg" id="grid1" class="sunlightPosition">
+<img src="assets/img/optimalSunlightPosition.svg" id="grid2">
+<img src="assets/img/optimalSunlightPosition.svg" id="grid3">
+<img src="assets/img/dahlia.png" id="plantObject">
+
+
+<!-- load main js file last after HTML DOM is loaded -->
+<script charset="UTF-8" src="js/draw.js" type="text/javascript"></script>
+<script type="text/javascript">
+    (function () {
+        // initialization code here
+        // the DOM will be available here
+        init()
+    })();
+
+
+    function openPlant(evt, PlaName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(PlaName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+</body>
+</html>

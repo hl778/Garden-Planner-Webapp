@@ -1,0 +1,142 @@
+/*
+ * login CSS
+*/
+html, body {
+    height: 100%;
+    margin: 0;
+}
+/*ie 6*/
+_main {
+    max-height: 200%;
+    overflow: hidden;
+}
+
+main {
+    max-height: 200%;
+    max-width: 100%;
+    padding: 90px 0px 0px 0px;
+    overflow: hidden;
+}
+/*back img*/
+.backImgLogin {
+    position: fixed;
+    z-index: -99;
+    top: 0%;
+    left: -50%;
+    width: 200%;
+}
+.backImgLogin img{
+    z-index: -99;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    /*min-width: 100%;*/
+    width: 100%;
+}
+.loginBox {
+    text-align: center;
+    border-radius: 5px;
+    margin: auto;
+    padding: 30px 10px 30px 10px;
+    background: linear-gradient(90deg, #fcedcc 40%, #90ee90 0%);
+}
+
+
+#loginGarden {
+    color: #0f9d58;
+}
+
+#button {
+    background: lightgreen;
+    border: none;
+    font-size: 15px;
+    color: white;
+}
+
+#button:hover {
+    transition: 0.5s;
+    background: green;
+    cursor: pointer;
+}
+
+.loginBtn {
+    background-color: rgb(40, 146, 80);
+    font-size: 18px;
+}
+.forgetPass {
+    font-size: 16px;
+    color: rgb(51, 105, 124);
+}
+/*label for username*/
+label.labelUser {
+    font-size: 15px;
+}
+.mainLoginCont p .rememberText {
+    font-size: 18px;
+}
+.noAccount {
+    font-size: 20px;
+}
+.resetTitle{
+    color: rgba(236, 19, 52, 0.96);
+}
+.noExist {
+    text-align: center;
+    font-size: x-large;
+    background-color: rgba(223, 231, 68, 0.82);
+    border-radius: 5px;
+}
+/*API requirement, credit author*/
+.unsplashCredit{
+    margin-bottom: 5px;
+}
+
+.unsplashCredit a{
+    background-color:black;
+    color:white;
+    text-decoration:none;
+    padding:4px 6px;
+    font-family: BlinkMacSystemFont, San Francisco, Arial, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    line-height:1.2;
+    display:inline-block;
+    border-radius:3px;
+}
+
+.unsplashCredit span:nth-child(1) {
+    display:inline-block;
+    padding:2px 3px;
+}
+
+.unsplashCredit span:nth-child(2) {
+    display:inline-block;
+    padding:2px 3px;
+}
+
+.unsplashCredit svg:nth-child(1) {
+    height:12px;
+    width:auto;
+    position:relative;
+    vertical-align:middle;
+    top:-2px;
+    fill:white;
+}
+.unsplashCredit #unsplashTitle{
+    display: block;
+    height:20px;
+    width:80px;
+    background-color: rgba(0, 0, 0, 0.75);
+    font-size: 10px;
+    margin-top: 2px;
+}
+/*err msg*/
+.errorRegister {
+    background-color: rgba(224, 218, 111, 0.07);
+    color: rgba(198, 43, 43, 0.92);
+    border-radius: 10px;
+    font-weight: bold;
+}
