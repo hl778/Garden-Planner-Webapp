@@ -2,7 +2,7 @@
 
 
 
-### Structure
+### App Structure
 
 ------------------
 
