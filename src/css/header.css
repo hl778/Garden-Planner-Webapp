@@ -1,0 +1,164 @@
+/*
+ * header
+*/
+
+/*header nav sticky bar*/
+.stickNavMainEle a{
+    color: rgba(0, 0, 0, 0.97);
+}
+.stickNavMainEle a:hover{
+    border-radius: 5px;
+    color: rgba(227, 226, 99, 0.92);
+    background-color: rgba(101, 155, 78, 0.91);
+    transition: background-color 0.3s;
+}
+/*at any given time/state, there will be only 2 btn */
+.navRightBtnOut {
+    color: #ffffff;
+    background-color: rgba(80, 159, 58, 0.93);
+}
+.navRightBtnIn {
+    color: #ffffff;
+    background-color: rgba(80, 159, 58, 0.93);
+}
+.navRightBtnSign {
+    color: #ffffff;
+    background-color: rgba(159, 58, 105, 0.93);
+}
+.indexRightMostNav li button {
+    border-radius: 5px;
+    margin-top: 2px;
+}
+.indexHeaderWrapper {
+    z-index: 99;
+    padding: 5px 5px 0 0;
+    display: none;
+    position: relative;
+    background: linear-gradient(90deg, #e0cfaa 50%, rgb(111, 208, 111) 50%);
+    margin-bottom: 0em;
+    -webkit-font-smoothing: antialiased;
+    height: 3.2em;
+    -webkit-transition: height 0.5s;
+    -moz-transition: height 0.5s;
+    -ms-transition: height 0.5s;
+    transition: height 0.5s;
+    overflow: hidden;
+}
+/*sticky nav bar top*/
+.stickyNav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+/*nav left tiny logo*/
+.navTinyLogo {
+    width: 20px;
+}
+.onlyPassMain {
+    visibility: hidden;
+}
+.indexHeaderWrapper.open {
+    height: 14em;
+    overflow: auto;
+}
+
+.indexRightMostNav {
+    text-align: right;
+}
+
+.indexMobileToggle {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+}
+
+.indexMobileToggle .bar {
+    background-color: #777;
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 100px;
+    position: absolute;
+    /* can be 18 but, each line 6px apart, then 3x6+6=24 */
+    top: 24px;
+    right: 7px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
+}
+/*toggle icon*/
+.indexMobileToggle .bar:first-child {
+    -webkit-transform: translateY(-6px);
+    -moz-transform: translateY(-6px);
+    -ms-transform: translateY(-6px);
+    transform: translateY(-6px);
+}
+
+.indexMobileToggle .bar:nth-child(2) {
+    -webkit-transform: translateY(-12px);
+    -moz-transform: translateY(-12px);
+    -ms-transform: translateY(-12px);
+    transform: translateY(-12px);
+}
+
+.indexMobileToggle.x .bar {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.indexMobileToggle.x .bar:first-child {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+@media (max-width: 47.999em) {
+    .indexRightMostNav {
+        text-align: left;
+    }
+
+    .indexMobileToggle {
+        display: block;
+    }
+
+}
+
+/*global font*/
+/*heading font*/
+.Caladea{
+    font-family: Caladea;
+}
+/*sub heading font*/
+.Faustina{
+    font-family: Faustina;
+}
+/*content font*/
+.Neuton{
+    font-family: Neuton;
+}
+
+.showOnlySmall{
+    display: none;
+}
+/*hide with small screen*/
+@media only screen and (max-width: 600px) {
+    .hideSmallScreen{
+        display: none;
+    }
+    .showOnlySmall{
+        display: block;
+    }
+}
+/*top nav btn*/
+.hiJack:hover {
+    transition: 0.5s;
+    background-color: #6bcddd;
+    border-radius: 30px;
+}

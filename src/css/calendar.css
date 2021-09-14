@@ -1,0 +1,18 @@
+/*
+ * login CSS
+*/
+html, body,.calendarWrapper{
+    margin:0px;
+    padding:0px;
+    height:100%;
+    /*overflow:auto;*/
+    overflow:hidden;
+}
+
+.calendarWrapper {
+    margin-top: 50px;
+    height: 87.8%;
+}
+.calendarWrapper li {
+    color: black !important;
+}
