@@ -35,7 +35,7 @@
     "pexels-api-wrapper": "^1.1.1",
     "request": "^2.88.2",
     "semver": "^7.3.2",
-    "three": "^0.115.0",
+    "three": "^0.131.3",
     "unsplash-js": "^6.0.0"
   },
   "devDependencies": {
