@@ -18,7 +18,7 @@
     "express-sanitizer": "^1.0.5",
     "express-session": "^1.17.1",
     "express-useragent": "^1.0.13",
-    "express-validator": "^6.4.1",
+    "express-validator": "^6.12.1",
     "flickr-sdk": "^3.9.0",
     "forever-monitor": "^2.0.0",
     "getusermedia": "^2.0.1",
