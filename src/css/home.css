@@ -1,0 +1,273 @@
+/*
+ * Index CSS
+*/
+
+/*global*/
+/*header*/
+.headerWrapper {
+    position: relative;
+    background: rgba(182, 199, 30, 0.15);
+    border-bottom: 2px solid rgba(33, 173, 42, 0.84); /*#0E0B16*/
+}
+/*username top right*/
+.hiJackHome {
+    padding: 2px;
+}
+.hiJackHome:hover {
+    transition: 0.5s;
+    background-color: #6bcddd;
+    border-radius: 5px;
+}
+
+/*current username, stay on the same row*/
+.hiJack {
+    display: inline-block;
+}
+/*logo cover*/
+div.logImgIndex img {
+    width: 40%;
+    margin: 30px 0 30px 0;
+}
+
+div.logImgIndex {
+    margin: 0 0 0 15%;
+}
+
+/* login logout sign up*/
+.accIndex {
+    position: absolute;
+    top: 20%;
+    right: 10px;
+    color: #21ad2a;
+    text-align: right;
+}
+
+.accIndex button {
+    border-radius: 5px;
+}
+
+/*at any given time/state, there will be only 2 children*/
+.accIndex button:nth-child(1) {
+    color: #ffffff;
+    background-color: rgba(80, 159, 58, 0.93);
+}
+
+.accIndex button:nth-child(2) {
+    color: #ffffff;
+    background-color: rgba(203, 78, 122, 0.93);
+}
+
+.accIndex a {
+    margin-right: 20px;
+    color: #21ad2a;
+}
+
+
+/* main tag */
+main.indexMain {
+    background: linear-gradient(90deg, #fcedcc 50%, #90ee90 50%);
+    background-size: cover;
+    font-family: sans-serif;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+/*master menu item*/
+.indexEle a {
+    text-decoration: none;
+    color: rgba(241, 243, 250, 0.93);
+    font-weight: normal
+}
+
+.indexEle {
+    background: rgba(24, 143, 31, 0.88);
+    width: 40%;
+    padding: 2px 0 2px 0;
+    transition: box-shadow 0.5s;
+}
+
+.indexLeft {
+    padding-left: 10px;
+    border-radius: 0 25px 25px 0;
+}
+
+.indexRight {
+    padding-right: 10px;
+    float: right;
+    text-align: right;
+    border-radius: 25px 0 0 25px;
+}
+
+.iconMediaHide {
+    display: none;
+}
+
+@media only screen and (max-width: 790px) {
+    .indexLeft, .indexRight {
+        text-align: center;
+        margin: auto;
+        float: none;
+        border-radius: 25px;
+        width: 80%;
+        margin-top: 10px;
+    }
+
+    .iconDatabase, .iconSearch {
+        display: none;
+    }
+
+    .iconMediaHide {
+        display: inline-block;
+    }
+}
+
+.indexEle a:hover::before {
+    transform: scale(1.0);
+    transition: .5s;
+    box-shadow: 0 0 15px rgba(16, 255, 76, 0.87);
+}
+
+.indexEle a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 60%;
+    border-radius: 50%;
+    background: rgba(255, 238, 16, 0.9);
+    transition: .5s;
+    transform: scale(.2);
+    z-index: -1;
+}
+
+.indexStartBtn {
+    margin: 10px 0 20px 0;
+    color: #ffffff;
+    background-color: rgba(214, 68, 100, 0.93);
+}
+
+/*master menu icons*/
+.iconDraw {
+    color: rgba(212, 148, 159, 0.99);
+}
+.iconSearch {
+    color: rgba(150, 190, 226, 0.99);
+}
+
+.iconCalendar {
+    color: rgba(231, 165, 95, 0.95);
+}
+
+.iconDatabase {
+    color: rgba(102, 212, 126, 0.95);
+}
+
+/*mid arrow*/
+.backArrow {
+    background: linear-gradient(rgba(204, 252, 220, 0.25) 50%, rgba(255, 255, 255, 0) 0) 0 0,
+    radial-gradient(circle closest-side, #ffffff 53%, rgba(255, 255, 255, 0) 0) 0 0,
+    radial-gradient(circle closest-side, #FFFFFF 50%, rgba(255, 255, 255, 0) 0) 55px 0 rgba(204, 252, 220, 0.37);
+    background-size: 55px 20px;
+    background-repeat: repeat-x;
+    /*background: linear-gradient(90deg, rgba(252, 237, 204, 0.24) 50%, rgba(144, 238, 144, 0.34) 50%);*/
+    /*background-size: cover;*/
+}
+
+.arrow {
+    font-size: x-large;
+    text-align: center;
+}
+
+.arrow a i {
+    color: rgba(227, 119, 119, 0.58);
+}
+
+/*bounce transition*/
+.bounce {
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+}
+
+/*animate*/
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+/* main intro */
+.mainIntro {
+    padding: 5px 100px 30px 100px;
+    background: linear-gradient(90deg, rgba(252, 237, 204, 0.48) 50%,
+    rgba(144, 238, 144, 0.37) 50%);
+}
+
+.detailIntro {
+    padding: 30px 0px 0px 0px;
+}
+
+.overview {
+    text-align: center;
+}
+
+.introImg img {
+    width: 50%;
+}
+
+.halfDetail {
+    display: inline-block;
+    text-align: left;
+}
+
+.halfImg {
+    float: right;
+    display: inline-block;
+    text-align: center;
+}
+
+.detailImg {
+    margin-top: 50px;
+    width: 60%;
+}
+
+.detailImg2 {
+    width: 60%;
+}
+
+.icon1 {
+    color: rgba(212, 148, 159, 0.95);
+}
+
+.icon2 {
+    color: rgba(88, 145, 196, 0.95);
+}
+
+.icon3 {
+    color: rgba(212, 131, 45, 0.95);
+}
+
+.icon4 {
+    color: rgba(80, 202, 82, 0.95);
+}
+/*info flash card*/
+.infoCard {
+    font-size: x-large;
+    color: #ca2249;
+    background-color: rgba(214, 227, 71, 0.97);
+    z-index: 999;
+    top: 50%;
+    position: fixed;
+    text-align: center;
+}
+/*notification calendar icon*/
+.indexIconNotification {
+    font-size: x-large;
+}

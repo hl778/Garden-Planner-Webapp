@@ -1,0 +1,178 @@
+<!-- index -->
+
+<%- include('./_head'); %>
+<link rel="stylesheet" type="text/css" href="css/home.css"/>
+</head>
+
+<body>
+<header class="headerWrapper pure-g">
+    <!-- user authentication -->
+    <div class="pure-u-1 accIndex">
+        <!--if logged in-->
+        <% if(currentUser) { %>
+            <a href="/users/profile/<%= currentUser.username %>" class="Faustina hiJackHome">
+                Hi, <%= currentUser.username %>
+            </a>
+            <button class="Faustina pure-button" onclick="location.href='/usr/520/logout'"
+                    type="button">Logout
+            </button>
+        <% } %>
+        <!--if NOT logged in-->
+        <% if(!currentUser) { %>
+            <button class="Faustina pure-button" onclick="location.href='/usr/520/login'"
+                    type="button">Login
+            </button>
+            <button class="Faustina pure-button" onclick="location.href='/usr/520/register'"
+                    type="button">Sign up
+            </button>
+        <% } %>
+    </div>
+    <!-- logo cover -->
+    <div class="logImgIndex pure-u-1">
+        <a href="/"><img src="assets/img/logo/vector/default-monochrome.svg"
+                         alt="gardening webapp logo"></a>
+    </div>
+</header>
+<!--sticky nav bar-->
+<%- include('./_topNav'); %>
+<!-- master links -->
+<main class="pure-g indexMain">
+    <!--flash card infos-->
+    <% if(typeof infos != 'undefined' && Array.isArray(infos) && infos.length > 0) { %>
+        <div class="pure-u-1 infoCard">
+            <p class="Caladea"><%= infos %></p>
+        </div>
+    <% } %>
+
+    <div class="pure-u-1">
+        <div class="indexEle indexLeft">
+            <h4>
+                <a class="indexMasterLink Faustina" href="">
+                    <i class="fas fa-pencil-ruler iconDraw"></i> DRAW GARDEN</a>
+            </h4>
+        </div>
+    </div>
+    <div class="pure-u-1">
+        <div class="indexEle indexRight">
+            <h4>
+                <a class="indexMasterLink Faustina" href="/search">
+                    <i class="fas fa-search iconSearch iconMediaHide"></i> PLANT SEARCH
+                    <i class="fas fa-search iconSearch"></i></a>
+            </h4>
+        </div>
+    </div>
+    <div class="pure-u-1">
+        <div class="indexEle indexLeft">
+            <h4>
+                <a class="indexMasterLink Faustina" href="/calendar">
+                    <i class="far fa-calendar-alt iconCalendar"></i> CALENDAR</a>
+                <%if(typeof finalCount!='undefined') {%>
+                <i class="fas fa-seedling indexIconNotification tooltipped"
+                   data-position="top" data-tooltip="No. of seeding"><%=finalCount[0]%></i>
+                <i class="fas fa-tree indexIconNotification tooltipped"
+                   data-position="top" data-tooltip="No. of flowering"><%=finalCount[1]%></i>
+                <i class="far fa-calendar indexIconNotification tooltipped"
+                   data-position="top" data-tooltip="No. of event"><%=finalCount[2]%></i>
+                <%}%>
+            </h4>
+        </div>
+    </div>
+    <div class="pure-u-1">
+        <div class="indexEle indexRight">
+            <h4>
+                <i class="fab fa-pagelines iconDatabase iconMediaHide"></i>
+                <a class="indexMasterLink Faustina" href="/list">DATABASE LIST
+                    <i class="fab fa-pagelines iconDatabase"></i></a>
+            </h4>
+        </div>
+    </div>
+</main>
+<!--if NOT logged in-->
+<% if(!currentUser) { %>
+    <!-- mid arrow -->
+    <div class="arrowWrapper pure-g">
+        <div class="pure-u-1 backArrow">
+            <div class="arrow bounce pure-u-1">
+                <a><i class="fas fa-angle-double-down"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- main intro info-->
+    <div class="pure-g mainIntro">
+        <div class="pure-u-1 overview">
+            <div class="pure-u-1 headOne">
+                <h1 class="Caladea">See it before planning</h1>
+            </div>
+            <div class="pure-u-1 headTwo">
+                <h5 class="Faustina">Your personal assistent to maintaince a garden</h5>
+            </div>
+            <div class="pure-u-1 indexBtn">
+                <button class="pure-button indexStartBtn Faustina" onclick="location.href='/usr/520/register'"
+                        type="button">Get Started
+                </button>
+            </div>
+            <div class="pure-u-1 introImg pure-img">
+                <img src="assets/img/siteImg/indexIntro.png" alt="">
+            </div>
+        </div>
+        <!--main intro details-->
+        <div class="pure-u-1 detailIntro">
+            <!--first-->
+            <div class="pure-u-1 pure-u-md-1-2 halfDetail">
+                <h5 class="detailHead Neuton">
+                    <i class="far fa-check-square icon1"></i>
+                    Garden Planner
+                </h5>
+                <p class="detailText Neuton">
+                    There are lots of things to keep track of, Garden Assistant does all the
+                    hard work gor you. We store, update and calculate all the data to suit your
+                    personal needs.
+                </p>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2 halfImg">
+                <img class="detailImg" src="assets/img/siteImg/indexIntro2.svg" alt="">
+            </div>
+            <!--second-->
+            <div class="pure-u-1 pure-u-md-1-2 halfDetail">
+                <h5 class="detailHead Neuton">
+                    <i class="far fa-calendar-alt icon2"></i>
+                    To-dos and Calendar
+                </h5>
+                <p class="detailText Neuton">
+                    We keep track all of your gardens’ tasks and important dates so you don’t have to.
+                </p>
+            </div>
+            <!--third-->
+            <div class="pure-u-1 pure-u-md-1-2 halfDetail">
+                <h5 class="detailHead Neuton">
+                    <i class="fas fa-paint-brush icon3"></i>
+                    Visual Planning
+                </h5>
+                <p class="detailText Neuton">
+                    You can see before you plant, with our AR and drag-drop features, the plants are already here.
+                </p>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2 halfImg">
+                <img class="detailImg2" src="assets/img/siteImg/indexIntro3.svg" alt="">
+            </div>
+            <!--4th-->
+            <div class="pure-u-1 pure-u-md-1-2 halfDetail">
+                <h5 class="detailHead Neuton">
+                    <i class="fas fa-tree icon4"></i>
+                    Community-driven Database/Wiki
+                </h5>
+                <p class="detailText Neuton">
+                    New plants can be added/updated, by our users. We build the knowledge of gardening together.
+                </p>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<%- include('./_footer'); %>
+<script type="text/javascript" src="js/home.js"></script>
+<!--<script type="text/javascript" src="/index.da297b5ba5be04f603de.bundle.js"></script>-->
+</body>
+
+</html> 

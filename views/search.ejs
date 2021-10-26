@@ -1,0 +1,191 @@
+<!-- search -->
+
+<%- include('./_head'); %>
+<link rel="stylesheet" type="text/css" href="/css/search.css">
+</head>
+
+<body>
+<header>
+    <!--sticky nav bar-->
+    <%- include('./_topNav'); %>
+</header>
+
+<main class="mainWrapper pure-g">
+    <form class="pure-form pure-u-1" action="/search" method="POST">
+        <fieldset class="pure-u-1">
+            <legend class="garTitle pure-u-1">
+                <a href="/search"><h3 class="garHead Caladea">
+                        <span class="gar">Garden Assistant</span> Database Search
+                    </h3></a>
+            </legend>
+            <!--warning msg, if has plant-->
+            <% if(typeof message != 'undefined') { %>
+                <div class="pure-u-20-24 errorSearch infoCard">
+                    <h6 class="Faustina">Please re-enter</h6>
+                    <p class="Faustina"><%= message %></p>
+                </div>
+            <% } %>
+            <!--warning msg, validator-->
+            <% if(typeof errors != 'undefined' && Array.isArray(errors) && errors.length > 0) { %>
+                <div class="pure-u-20-24 errorSearch infoCard">
+                    <h6 class="Faustina">Please re-enter</h6>
+                    <% errors.forEach(function(result) { %>
+                        <% if(typeof result.message != 'undefined') { %>
+                            <p class="Faustina"><%= result.message %>.</p>
+                        <% }else { %>
+                            <p class="Faustina"><%= result %></p>
+                        <% } %>
+                    <% }) %>
+                </div>
+            <% } %>
+            <!--Prevent CSRF-->
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <!--search box-->
+            <div class="searchBox pure-u-1 pure-u-md-17-24">
+                <div class="pure-u-1 pure-u-md-18-24 input-field searchWrapper">
+                    <input id="search-box" class="validate" type="text" name="keyword" required maxlength="30">
+                    <label for="search-box" class="Caladea alignLabel">
+                        <span class="Faustina hideSmallScreen">Enter the plant you're searching for...</span>
+                        <span class="Faustina showOnlySmall">Enter Keyword</span>
+                    </label>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-24 buttonWrapper">
+                    <button type="submit" id="button" class="pure-button pure-button-primary Faustina">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <!--footnote, if no result-->
+    <% if(typeof availablePlants == 'undefined' && typeof message == 'undefined') { %>
+        <div class="footnotes pure-u-1">
+            <p class="Neuton"><u>For example:</u></p>
+            <p class="Neuton"> Enter
+                <span class="highSearchText">'Dahlia' or 'dah' or 'd'</span>
+                to search our database for the Dahlia plant.</p>
+        </div>
+    <% } %>
+    <!--footnote, if has result-->
+    <% if(typeof availablePlants != 'undefined' || typeof message != 'undefined') { %>
+        <div class="footnotes pure-u-1">
+            <p class="Neuton"><b>Help to grow our community</b></p>
+            <p class="Neuton">You can <a href="/list">Add</a> more plants to our database.</p>
+        </div>
+        <!--down indicate arrow-->
+        <% if(typeof availablePlants != 'undefined') { %>
+            <div class="pure-u-1 backArrow">
+                <div class="arrow bounce pure-u-1">
+                    <a><i class="fas fa-angle-double-down"></i></a>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</main>
+
+<!--search result-->
+<% if(typeof availablePlants != 'undefined' && Array.isArray(availablePlants) && availablePlants.length > 0) { %>
+    <div class="pure-g">
+        <div class="pure-u-1 searchResult">
+            <h3 class="garHead Caladea pure-u-1 resultTitle">Search Result</h3>
+            <!--helper text-->
+            <div class="pure-u-10-24">
+            <p class="Faustina clickText">
+                Click <b>image</b> to select and add to your collection,
+                click <b>title</b> to go to detail page.</p>
+            </div>
+            <form class="resultForm" action="users/input_userPlants" method="POST">
+                <!--Prevent CSRF-->
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <!--last visited URL-->
+                <input type="hidden" name="lastVisitedURL" value="<%= lastVisitedURL %>">
+                <div class="pure-u-1 masterCentreResult">
+                    <% availablePlants.forEach(function(plants){ %>
+                        <div class="pure-u-1 pure-u-sm-11-24 pure-u-md-5-24 imgAndTitle">
+                            <h5 class="Faustina"><%= plants.plantName %></h5>
+                            <p class="Neuton"><%= plants.type %></p>
+                            <!--checkbox-->
+                            <div class="subCheck">
+                                <label>
+                                    <input type="checkbox" class="filled-in checkboxSub" name="userPlants[]"
+                                           value="<%= plants.plantName %>">
+                                    <span class="labelReplace"></span>
+                                </label>
+                            </div>
+                            <!--each img-->
+                            <div class="imgSubWrapper pure-u-1 pure-img">
+                                <p class="searchImg"><%= plants.imageURL %></p>
+                                <!--logo from flickr API-->
+                                <% if(plants.imageURLFromAPI) { %>
+                                    <div class="flickrAPILogoWrapper tooltipped" data-position="top" data-tooltip="Image from Flickr">
+                                        <img class="dictionAPILogo"
+                                             src="assets/img/siteImg/flickrlogo.jpg"
+                                             alt="flickr Logo">
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+                <!--side btn-->
+                <div class="fixedBtnWrapper">
+                    <div class="pure-u-1 pure-u-md-1-2 activeAddWrapperParent">
+                        <button type="submit" data-position="left" data-tooltip="Add to your collection"
+                                class="tooltipped activeAddWrapper pure-button pure-button-primary Faustina collecBtn hideWhenNon">
+                            <i class="fas fa-star"></i> <b><span id="countCheck"></span></b>
+                        </button>
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-2 activeAddWrapperParent">
+                        <button type="button" data-position="left" data-tooltip="Clear selection"
+                                class="tooltipped activeAddWrapper pure-button pure-button-primary Faustina resetBtn hideWhenNon">
+                            <i class="fas fa-redo-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<% } %>
+<!--plants added msg-->
+<% if(typeof updatedUser != 'undefined') { %>
+    <div class="pure-g ifHasAdded">
+        <div class="pure-u-1 addedInfoWrapper">
+            <div class="pure-u-1 addedInfoSubWrapper">
+                <h5 class="Faustina">Plants added to your collection successfully.</h5>
+                <!--if new plants been added, without duplicate, need to + the added number-->
+                <!--since the returned updatedUser object is the old one-->
+                <% if(countUnique == 0) { %>
+                    <p class="Neuton addedSubMeg">Now you have <span class="addedSubMeg highlightUser Neuton">
+                    <%= updatedUser.userPlantsBackup.length + originalSelectedNumber %>
+                </span> plants (no duplicates).</p>
+                <% }else { %>
+                    <p class="Neuton addedSubMeg">Now you have <span class="addedSubMeg highlightUser Neuton">
+                    <%= updatedUser.userPlantsBackup.length %>
+                </span> plants (no duplicates).</p>
+                <% } %>
+                <!--if duplicates selected-->
+                <% if(typeof countUnique != 'undefined' && countUnique != 0) { %>
+                    <% if(countUnique == 1) { %>
+                        <p class="addedSubMeg Neuton"><%= countUnique %> of the selected plants is already in your
+                            collection.</p>
+                    <% }else { %>
+                        <p class="addedSubMeg Neuton"><%= countUnique %> of the selected plants are already in your
+                            collection.</p>
+                    <% } %>
+                <% } %>
+                <p class="addedSubMeg Neuton">You can go to <a href="/users/profile/<%= currentUser.username %>">your
+                        Profile Page</a> to check.</p>
+            </div>
+            <div class="pure-u-1 closeMsg Faustina">
+                Close <i class="fas fa-times-circle"></i>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<%- include('./_footer'); %>
+<script type="text/javascript" src="/js/universe.js"></script>
+<script type="text/javascript" src="/js/search.js"></script>
+</body>
+</html> 

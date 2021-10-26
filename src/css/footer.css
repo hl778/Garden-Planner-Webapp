@@ -1,0 +1,13 @@
+.footerSub{
+    display: inline-block;
+    margin-right: 20px;
+}
+.footerWrapper {
+    text-align: center;
+}
+footer {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 150px;
+}
